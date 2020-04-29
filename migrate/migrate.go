@@ -180,6 +180,10 @@ func (svc *Service) getDbVersion() (version int, err error) {
 // for more complex code-based migrations.
 func (svc *Service) AddMigration(m Migration) {
 	svc.migrations = append(svc.migrations, m)
+
+	sort.SliceStable(svc.migrations, func(i, j int) bool {
+		return svc.migrations[i].Version() < svc.migrations[j].Version()
+	})
 }
 
 func (svc *Service) getMigrations(folder string) ([]Migration, error) {
