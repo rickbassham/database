@@ -42,8 +42,8 @@ type Service struct {
 	err        error
 }
 
-// NewMigrateDB creates a new Service.
-func NewMigrateDB(db *database.Database) (*Service, error) {
+// NewService creates a new Service.
+func NewService(db *database.Database) (*Service, error) {
 	err := db.RegisterStatement("CREATE_DB_VERSION_TABLE", createDbVersionTable)
 	if err != nil {
 		return nil, fmt.Errorf("register statement CREATE_DB_VERSION_TABLE: %w", err)
